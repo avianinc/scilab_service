@@ -34,26 +34,26 @@
 #
 ######################################################
 
-# Configuration Variables
-HOSTNAME="scilab-service"
-INDEX_URL="https://nexus.mgmt.internal:8443/repository/pypi-internal/simple"
-EFS_ID="fs-03be23c91310a0b60"
+# # Configuration Variables
+# HOSTNAME="scilab-service"
+# INDEX_URL="https://nexus.mgmt.internal:8443/repository/pypi-internal/simple"
+# EFS_ID="fs-03be23c91310a0b60"
 EFS_MOUNT_POINT="/mnt/cdefs"
 EFS_BASE_DIR="/mnt/cdefs/results"  # Base directory for writing results
 
-# Install EFS Utils
-sudo apt-get update
-sudo apt-get -y install git binutils
-git clone https://gitlab.mgmt.internal/jdehart/efs-utils.git
-cd efs-utils
-sudo chmod +x build-deb.sh
-./build-deb.sh
-sudo apt-get -y install ./build/amazon-efs-utils*deb
-cd ..
+# # Install EFS Utils
+# sudo apt-get update
+# sudo apt-get -y install git binutils
+# git clone https://gitlab.mgmt.internal/jdehart/efs-utils.git
+# cd efs-utils
+# sudo chmod +x build-deb.sh
+# ./build-deb.sh
+# sudo apt-get -y install ./build/amazon-efs-utils*deb
+# cd ..
 
-# Change the hostname
-sudo hostnamectl set-hostname $HOSTNAME
-echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
+# # Change the hostname
+# sudo hostnamectl set-hostname $HOSTNAME
+# echo "127.0.1.1 $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
 
 # Update and install Scilab (not Scilab-CLI)
 sudo apt-get update
@@ -63,7 +63,7 @@ sudo apt-get install -y scilab
 sudo apt-get install -y python3 python3-pip
 
 # Install Flask using the specified internal repository
-pip3 install Flask --index-url $INDEX_URL --trusted-host $(echo $INDEX_URL | awk -F/ '{print $3}')
+pip3 install Flask # --index-url $INDEX_URL --trusted-host $(echo $INDEX_URL | awk -F/ '{print $3}')
 
 # Flask application setup
 FLASK_APP_DIR="$HOME/flask_scilab"
